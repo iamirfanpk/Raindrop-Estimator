@@ -1,4 +1,3 @@
-// src/components/MapComponent.js
 import React, { useRef, useEffect, useState } from "react";
 import { MapContainer, TileLayer, LayersControl, useMap } from "react-leaflet";
 import { FeatureGroup } from "react-leaflet";
@@ -8,7 +7,7 @@ import * as turf from "@turf/turf";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import L from "leaflet";
-
+import './MapComponent.css'; // New CSS file
 
 const API_KEY = "53b23e6c2e8cf28f70182c826563386b";
 
@@ -40,6 +39,12 @@ const UserLocationMarker = () => {
 const MapComponent = () => {
   const mapRef = useRef();
   const [radarTimestamp, setRadarTimestamp] = useState(null);
+  const [currentStats, setCurrentStats] = useState({
+    area: 0,
+    rain: 0,
+    raindrops: 0,
+    location: { lat: 20.5937, lon: 78.9629 }
+  });
 
   // 🛰️ Fetch latest radar timestamp from RainViewer
   useEffect(() => {
@@ -74,6 +79,14 @@ const MapComponent = () => {
       const avgDropVolumeML = 0.05;
       const estimatedRaindrops = Math.round((volumeLiters * 1000) / avgDropVolumeML);
 
+      // Update stats
+      setCurrentStats({
+        area: areaInSqKm,
+        rain: rainMM,
+        raindrops: estimatedRaindrops,
+        location: { lat, lon }
+      });
+
       const popupContent = `
         📍 Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}<br/>
         📏 Area: ${areaInSqKm.toFixed(2)} km²<br/>
@@ -89,47 +102,118 @@ const MapComponent = () => {
   };
 
   return (
-    <MapContainer
-      center={[20.5937, 78.9629]} // India center
-      zoom={5}
-      style={{ height: "100vh", width: "100%" }}
-      ref={mapRef}
-    >
-      <UserLocationMarker />
-      <LayersControl position="topright">
-        <LayersControl.BaseLayer checked name="OpenStreetMap">
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution="&copy; OpenStreetMap contributors"
-          />
-        </LayersControl.BaseLayer>
+    <div className="map-component">
+      {/* Header */}
+      <div className="map-header">
+        <div className="header-title">
+          <div className="title-icon">🌍</div>
+          <h2 className="section-title">Live Weather Estimation</h2>
+        </div>
+        <p className="section-description">
+          Draw shapes on the map to get real-time rainfall data and raindrop estimates for any area
+        </p>
+      </div>
 
-        {radarTimestamp && (
-          <LayersControl.Overlay checked name="RainViewer Radar">
-            <TileLayer
-              url={`https://tilecache.rainviewer.com/v2/radar/${radarTimestamp}/256/{z}/{x}/{y}/2/1_1.png`}
-              opacity={0.6}
-              zIndex={1000}
+      {/* Stats Cards */}
+      <div className="stats-grid">
+        <div className="stat-card stat-card-blue">
+          <div className="stat-icon">📏</div>
+          <div className="stat-content">
+            <p className="stat-label">Selected Area</p>
+            <p className="stat-value">{currentStats.area.toFixed(1)} km²</p>
+          </div>
+        </div>
+
+        <div className="stat-card stat-card-purple">
+          <div className="stat-icon">☁️</div>
+          <div className="stat-content">
+            <p className="stat-label">Rainfall Rate</p>
+            <p className="stat-value">{currentStats.rain.toFixed(1)} mm/hr</p>
+          </div>
+        </div>
+
+        <div className="stat-card stat-card-cyan">
+          <div className="stat-icon">💧</div>
+          <div className="stat-content">
+            <p className="stat-label">Estimated Raindrops</p>
+            <p className="stat-value">{currentStats.raindrops.toLocaleString()}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Map Container */}
+      <div className="map-container-wrapper">
+        <div className="map-header-bar">
+          <h3 className="map-title">
+            👁️ Interactive Weather Map
+          </h3>
+          <div className="live-indicator">
+            <div className="live-dot"></div>
+            Live Data
+          </div>
+        </div>
+        
+        <MapContainer
+          center={[20.5937, 78.9629]} // India center
+          zoom={5}
+          style={{ height: "500px", width: "100%" }}
+          ref={mapRef}
+          className="enhanced-map"
+        >
+          <UserLocationMarker />
+          <LayersControl position="topright">
+            <LayersControl.BaseLayer checked name="OpenStreetMap">
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&copy; OpenStreetMap contributors"
+              />
+            </LayersControl.BaseLayer>
+
+            {radarTimestamp && (
+              <LayersControl.Overlay checked name="RainViewer Radar">
+                <TileLayer
+                  url={`https://tilecache.rainviewer.com/v2/radar/${radarTimestamp}/256/{z}/{x}/{y}/2/1_1.png`}
+                  opacity={0.6}
+                  zIndex={1000}
+                />
+              </LayersControl.Overlay>
+            )}
+          </LayersControl>
+
+          <FeatureGroup>
+            <EditControl
+              position="topright"
+              onCreated={onCreated}
+              draw={{
+                rectangle: true,
+                polygon: true,
+                circle: false,
+                circlemarker: false,
+                marker: false,
+                polyline: false,
+              }}
             />
-          </LayersControl.Overlay>
-        )}
-      </LayersControl>
+          </FeatureGroup>
+        </MapContainer>
+      </div>
 
-      <FeatureGroup>
-        <EditControl
-          position="topright"
-          onCreated={onCreated}
-          draw={{
-            rectangle: true,
-            polygon: true,
-            circle: false,
-            circlemarker: false,
-            marker: false,
-            polyline: false,
-          }}
-        />
-      </FeatureGroup>
-    </MapContainer>
+      {/* Instructions */}
+      <div className="instructions-card">
+        <h4 className="instructions-title">
+          ⚙️ How to Use
+        </h4>
+        <div className="instructions-grid">
+          <div className="instruction-item">
+            <div className="instruction-number">1</div>
+            <p>Use the drawing tools to select an area on the map</p>
+          </div>
+          <div className="instruction-item">
+            <div className="instruction-number">2</div>
+            <p>View real-time rainfall data and raindrop estimates</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
