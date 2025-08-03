@@ -87,17 +87,74 @@ const MapComponent = () => {
         location: { lat, lon }
       });
 
+      // Create themed popup content with custom styling
       const popupContent = `
-        📍 Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)}<br/>
-        📏 Area: ${areaInSqKm.toFixed(2)} km²<br/>
-        🌧️ Rain: ${rainMM} mm/hr<br/>
-        💧 Raindrops: ${estimatedRaindrops.toLocaleString()}
+        <div style="
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1.6;
+          color: #1f2937;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+          backdrop-filter: blur(16px);
+          border-radius: 12px;
+          padding: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+          min-width: 240px;
+        ">
+          <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">📍</span>
+            <span><strong style="color: #3b82f6;">Lat:</strong> ${lat.toFixed(4)}, <strong style="color: #3b82f6;">Lon:</strong> ${lon.toFixed(4)}</span>
+          </div>
+          <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">📏</span>
+            <span><strong style="color: #8b5cf6;">Area:</strong> ${areaInSqKm.toFixed(2)} km²</span>
+          </div>
+          <div style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">🌧️</span>
+            <span><strong style="color: #06b6d4;">Rain:</strong> ${rainMM.toFixed(1)} mm/hr</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 16px;">💧</span>
+            <span><strong style="color: #10b981;">Raindrops:</strong> ${estimatedRaindrops.toLocaleString()}</span>
+          </div>
+        </div>
       `;
 
-      layer.bindPopup(popupContent).openPopup();
+      layer.bindPopup(popupContent, {
+        maxWidth: 300,
+        className: 'themed-popup'
+      }).openPopup();
     } catch (error) {
       console.error("Rain data fetch error:", error);
-      layer.bindPopup("⚠️ Failed to fetch rain data").openPopup();
+      
+      // Themed error popup
+      const errorPopupContent = `
+        <div style="
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: #dc2626;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 250, 252, 0.95));
+          backdrop-filter: blur(16px);
+          border-radius: 12px;
+          padding: 16px;
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+          text-align: center;
+        ">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span style="font-size: 16px;">⚠️</span>
+            <span><strong>Error:</strong> Failed to fetch weather data</span>
+          </div>
+        </div>
+      `;
+      
+      layer.bindPopup(errorPopupContent, {
+        maxWidth: 280,
+        className: 'themed-popup'
+      }).openPopup();
     }
   };
 
