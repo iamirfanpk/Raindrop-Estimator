@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
-
+import './ManualEstimation.css'; // New CSS file
 
 function ManualEstimation() {
   const [duration, setDuration] = useState(1);
@@ -58,38 +58,70 @@ function ManualEstimation() {
   };
 
   return (
-    <div className="p-4 space-y-4">
-      <h2 className="text-xl font-bold">Manual Raindrop Estimation</h2>
+    <div className="manual-estimation">
+      {/* Header */}
+      <div className="manual-header">
+        <div className="header-title">
+          <div className="title-icon">🧮</div>
+          <h2 className="section-title">Manual Estimation</h2>
+        </div>
+        <p className="section-description">
+          Customize parameters and draw your area to calculate precise raindrop estimates
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label>Duration (hours):</label>
+      {/* Input Controls */}
+      <div className="input-grid">
+        <div className="input-card input-card-purple">
+          <label className="input-label">
+            ⏱️ Duration (hours)
+          </label>
           <input
             type="number"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="border p-2 w-full"
+            className="enhanced-input"
             min={0.1}
             step={0.1}
+            placeholder="Enter duration..."
           />
         </div>
 
-        <div>
-          <label>Raindrop Size (mm):</label>
+        <div className="input-card input-card-pink">
+          <label className="input-label">
+            💧 Raindrop Size (mm)
+          </label>
           <input
             type="number"
             value={raindropSize}
             onChange={(e) => setRaindropSize(e.target.value)}
-            className="border p-2 w-full"
+            className="enhanced-input"
             min={0.1}
             step={0.1}
+            placeholder="Enter size..."
           />
         </div>
       </div>
 
-      <div>
-        <label className="font-medium">Select Area on Map:</label>
-        <MapContainer center={[18.52, 73.85]} zoom={10} style={{ height: "400px", width: "100%" }}>
+      {/* Map Section */}
+      <div className="map-container-wrapper">
+        <div className="map-header-bar">
+          <h3 className="map-title">
+            📍 Select Area on Map
+          </h3>
+          {selectedArea && (
+            <div className="area-display">
+              Area: {(selectedArea / 1000000).toFixed(2)} km²
+            </div>
+          )}
+        </div>
+        
+        <MapContainer 
+          center={[18.52, 73.85]} 
+          zoom={10} 
+          style={{ height: "400px", width: "100%" }}
+          className="enhanced-map"
+        >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution="&copy; OpenStreetMap contributors"
@@ -111,18 +143,57 @@ function ManualEstimation() {
         </MapContainer>
       </div>
 
-      <button
-        onClick={handleEstimate}
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Estimate
-      </button>
+      {/* Calculate Button */}
+      <div className="calculate-section">
+        <button
+          onClick={handleEstimate}
+          className="calculate-button"
+        >
+          <span className="button-icon">🧮</span>
+          Calculate Raindrops
+        </button>
+      </div>
 
+      {/* Results */}
       {estimatedDrops !== null && (
-        <div className="mt-4 text-lg">
-          💧 Estimated Raindrops: <strong>{estimatedDrops.toLocaleString()}</strong>
+        <div className="results-card">
+          <div className="results-header">
+            <div className="results-icon">💧</div>
+            <h3 className="results-title">Estimation Result</h3>
+          </div>
+          <div className="results-value">
+            {estimatedDrops.toLocaleString()}
+          </div>
+          <p className="results-label">Estimated Raindrops</p>
         </div>
       )}
+
+      {/* Parameter Summary */}
+      <div className="parameters-card">
+        <h4 className="parameters-title">
+          ⚙️ Current Parameters
+        </h4>
+        <div className="parameters-grid">
+          <div className="parameter-item">
+            <div className="parameter-value parameter-purple">{duration}</div>
+            <div className="parameter-label">Hours</div>
+          </div>
+          <div className="parameter-item">
+            <div className="parameter-value parameter-pink">{raindropSize}</div>
+            <div className="parameter-label">mm Size</div>
+          </div>
+          <div className="parameter-item">
+            <div className="parameter-value parameter-blue">
+              {selectedArea ? (selectedArea / 1000000).toFixed(1) : '0'}
+            </div>
+            <div className="parameter-label">km² Area</div>
+          </div>
+          <div className="parameter-item">
+            <div className="parameter-value parameter-green">1.0</div>
+            <div className="parameter-label">mm/hr Rain</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
