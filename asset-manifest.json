@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Raindrop-Estimator/static/css/main.20f43255.css",
+    "main.css": "/Raindrop-Estimator/static/css/main.3dd87a83.css",
     "main.js": "/Raindrop-Estimator/static/js/main.b5aac729.js",
     "static/js/453.00f96b5f.chunk.js": "/Raindrop-Estimator/static/js/453.00f96b5f.chunk.js",
     "static/media/spritesheet.svg": "/Raindrop-Estimator/static/media/spritesheet.a4e0eb7ad904a4858361.svg",
     "index.html": "/Raindrop-Estimator/index.html",
-    "main.20f43255.css.map": "/Raindrop-Estimator/static/css/main.20f43255.css.map",
+    "main.3dd87a83.css.map": "/Raindrop-Estimator/static/css/main.3dd87a83.css.map",
     "main.b5aac729.js.map": "/Raindrop-Estimator/static/js/main.b5aac729.js.map",
     "453.00f96b5f.chunk.js.map": "/Raindrop-Estimator/static/js/453.00f96b5f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.20f43255.css",
+    "static/css/main.3dd87a83.css",
     "static/js/main.b5aac729.js"
   ]
 }
