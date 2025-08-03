@@ -1,0 +1,327 @@
+/* ManualEstimation.css - Manual Estimation styles */
+.manual-estimation {
+  space-y: 1.5rem;
+}
+
+/* Header Section */
+.manual-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.title-icon {
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  border-radius: 1rem;
+  font-size: 2rem;
+  box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
+}
+
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: bold;
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.section-description {
+  color: #6b7280;
+  max-width: 40rem;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Input Grid */
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.input-card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.input-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.input-card-purple {
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  border-color: #c4b5fd;
+}
+
+.input-card-pink {
+  background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+  border-color: #f9a8d4;
+}
+
+.input-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.input-card-purple .input-label {
+  color: #6d28d9;
+}
+
+.input-card-pink .input-label {
+  color: #be185d;
+}
+
+.enhanced-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid;
+  border-radius: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s ease;
+}
+
+.enhanced-input:focus {
+  outline: none;
+  transform: scale(1.02);
+}
+
+.enhanced-input::placeholder {
+  color: #9ca3af;
+}
+
+.input-card-purple .enhanced-input {
+  border-color: #c4b5fd;
+}
+
+.input-card-purple .enhanced-input:focus {
+  border-color: #8b5cf6;
+}
+
+.input-card-pink .enhanced-input {
+  border-color: #f9a8d4;
+}
+
+.input-card-pink .enhanced-input:focus {
+  border-color: #ec4899;
+}
+
+/* Map Container */
+.map-container-wrapper {
+  background: white;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.map-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.map-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.area-display {
+  font-size: 0.875rem;
+  color: #6b7280;
+  background: #f3f4f6;
+  padding: 0.5rem 0.75rem;
+  border-radius: 50px;
+}
+
+.enhanced-map {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 2px solid #e5e7eb;
+}
+
+/* Calculate Button */
+.calculate-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.calculate-button {
+  background: linear-gradient(135deg, #9333ea, #ec4899);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  box-shadow: 0 10px 25px rgba(147, 51, 234, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.calculate-button:hover {
+  background: linear-gradient(135deg, #7c3aed, #db2777);
+  box-shadow: 0 20px 40px rgba(147, 51, 234, 0.4);
+  transform: translateY(-2px) scale(1.05);
+}
+
+.button-icon {
+  font-size: 1.5rem;
+}
+
+/* Results Card */
+.results-card {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  border: 1px solid #6ee7b7;
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.results-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.results-icon {
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 1rem;
+  font-size: 2rem;
+}
+
+.results-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #065f46;
+  margin: 0;
+}
+
+.results-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #047857;
+  margin-bottom: 0.5rem;
+}
+
+.results-label {
+  color: #065f46;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Parameters Card */
+.parameters-card {
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid #d1d5db;
+}
+
+.parameters-title {
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.parameters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.parameter-item {
+  text-align: center;
+}
+
+.parameter-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.parameter-purple {
+  color: #7c3aed;
+}
+
+.parameter-pink {
+  color: #ec4899;
+}
+
+.parameter-blue {
+  color: #2563eb;
+}
+
+.parameter-green {
+  color: #059669;
+}
+
+.parameter-label {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .map-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .parameters-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .calculate-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .results-value {
+    font-size: 2rem;
+  }
+}
