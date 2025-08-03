@@ -1,4 +1,6 @@
 /* ManualEstimation.css - Manual Estimation styles */
+@import './MapTools.css'; /* Import enhanced map tools styling */
+
 .manual-estimation {
   space-y: 1.5rem;
 }

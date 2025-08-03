@@ -1,4 +1,6 @@
 /* MapComponent.css - Live Weather Estimation styles */
+@import './MapTools.css'; /* Import enhanced map tools styling */
+
 .map-component {
   space-y: 1.5rem;
 }
