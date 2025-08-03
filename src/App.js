@@ -25,7 +25,7 @@ function App() {
               💧
             </div>
             <div className="logo-text">
-              <h1 className="app-title">RainDrop Counter</h1>
+              <h1 className="app-title">RainDrop Estimator</h1>
               <p className="app-subtitle">Advanced Weather Analytics</p>
             </div>
           </div>
@@ -33,7 +33,7 @@ function App() {
           {/* Toggle Switch */}
           <div className="toggle-container">
             <span className={`toggle-label ${!isLiveMode ? 'active' : ''}`}>
-              📐 Manual
+              🧮 Manual
             </span>
             <label className="switch enhanced-switch">
               <input
