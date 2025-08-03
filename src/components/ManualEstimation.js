@@ -4,6 +4,7 @@ import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 
+
 function ManualEstimation() {
   const [duration, setDuration] = useState(1);
   const [raindropSize, setRaindropSize] = useState(2); // in mm
