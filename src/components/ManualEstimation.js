@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import "leaflet/dist/leaflet.css";
@@ -10,6 +10,21 @@ function ManualEstimation() {
   const [raindropSize, setRaindropSize] = useState(2); // in mm
   const [selectedArea, setSelectedArea] = useState(null); // in m²
   const [estimatedDrops, setEstimatedDrops] = useState(null);
+  const [mapCenter, setMapCenter] = useState([18.52, 73.85]); // Default to Pune
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setMapCenter([latitude, longitude]);
+        },
+        (error) => {
+          console.warn("Could not fetch user location, using default.", error);
+        }
+      );
+    }
+  }, []);
 
   const handleAreaChange = (e) => {
     const layer = e.layer;
@@ -115,9 +130,9 @@ function ManualEstimation() {
             </div>
           )}
         </div>
-        
+
         <MapContainer 
-          center={[18.52, 73.85]} 
+          center={mapCenter} 
           zoom={10} 
           style={{ height: "400px", width: "100%" }}
           className="enhanced-map"
