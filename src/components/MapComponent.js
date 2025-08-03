@@ -9,7 +9,8 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import L from "leaflet";
 import './MapComponent.css'; // New CSS file
 
-const API_KEY = "53b23e6c2e8cf28f70182c826563386b";
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
+
 
 const UserLocationMarker = () => {
   const map = useMap();
