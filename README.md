@@ -2,6 +2,8 @@
 
 An interactive web app that estimates the number of raindrops falling in a selected area using real-time weather data and manual input calculations. Built using **React**, **Leaflet**, **OpenWeatherMap API**, and **RainViewer**.
 
+🔗 **Live Demo**: https://iamirfanpk.github.io/Raindrop-Estimator/
+
 ## 📌 Features
 
 - 🌍 **Live Estimation Mode**:
