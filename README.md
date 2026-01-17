@@ -33,7 +33,7 @@ An interactive web app that estimates the number of raindrops falling in a selec
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/Raindrop-Estimator.git
+git clone https://github.com/iamirfanpk/Raindrop-Estimator.git
 cd Raindrop-Estimator
 
 # Install dependencies
